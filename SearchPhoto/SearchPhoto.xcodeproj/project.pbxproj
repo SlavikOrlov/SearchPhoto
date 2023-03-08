@@ -15,6 +15,11 @@
 		5564D66E29B7CCFC000794E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5564D66D29B7CCFC000794E2 /* Assets.xcassets */; };
 		5564D67129B7CCFC000794E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5564D66F29B7CCFC000794E2 /* LaunchScreen.storyboard */; };
 		5564D67E29B7DA78000794E2 /* AssetColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5564D67D29B7DA78000794E2 /* AssetColor.swift */; };
+		55B1215F29B9101800EADFB4 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1215E29B9101800EADFB4 /* ImageModel.swift */; };
+		55B1216229B9106C00EADFB4 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1216129B9106C00EADFB4 /* Error.swift */; };
+		55B1216429B9108C00EADFB4 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1216329B9108C00EADFB4 /* ImageLoader.swift */; };
+		55B1216629B910A300EADFB4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1216529B910A300EADFB4 /* NetworkService.swift */; };
+		55B1216829B910CB00EADFB4 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1216729B910CB00EADFB4 /* Urls.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		5564D67029B7CCFC000794E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5564D67229B7CCFC000794E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5564D67D29B7DA78000794E2 /* AssetColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetColor.swift; sourceTree = "<group>"; };
+		55B1215E29B9101800EADFB4 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		55B1216129B9106C00EADFB4 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		55B1216329B9108C00EADFB4 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		55B1216529B910A300EADFB4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		55B1216729B910CB00EADFB4 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +108,8 @@
 		5564D67B29B7CE76000794E2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55B1216029B9105B00EADFB4 /* Services */,
+				55B1215D29B9100500EADFB4 /* Models */,
 				5564D67F29B7EB23000794E2 /* Extension */,
 				5564D67C29B7DA6F000794E2 /* Colors */,
 				5564D66D29B7CCFC000794E2 /* Assets.xcassets */,
@@ -119,6 +131,25 @@
 				550FA8BF29B7EB8C00023E27 /* ExtensionKeyboard.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		55B1215D29B9100500EADFB4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				55B1215E29B9101800EADFB4 /* ImageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		55B1216029B9105B00EADFB4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				55B1216129B9106C00EADFB4 /* Error.swift */,
+				55B1216329B9108C00EADFB4 /* ImageLoader.swift */,
+				55B1216529B910A300EADFB4 /* NetworkService.swift */,
+				55B1216729B910CB00EADFB4 /* Urls.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,10 +224,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5564D66929B7CCFA000794E2 /* MainViewController.swift in Sources */,
+				55B1215F29B9101800EADFB4 /* ImageModel.swift in Sources */,
 				5564D66529B7CCFA000794E2 /* AppDelegate.swift in Sources */,
 				5564D67E29B7DA78000794E2 /* AssetColor.swift in Sources */,
+				55B1216629B910A300EADFB4 /* NetworkService.swift in Sources */,
 				5564D66729B7CCFA000794E2 /* SceneDelegate.swift in Sources */,
+				55B1216229B9106C00EADFB4 /* Error.swift in Sources */,
+				55B1216429B9108C00EADFB4 /* ImageLoader.swift in Sources */,
 				550FA8C029B7EB8C00023E27 /* ExtensionKeyboard.swift in Sources */,
+				55B1216829B910CB00EADFB4 /* Urls.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
