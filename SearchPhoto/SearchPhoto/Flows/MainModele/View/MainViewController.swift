@@ -16,9 +16,9 @@ final class MainViewController: UIViewController {
         static let fontSize: CGFloat = 16
         static let placeholderText: String = "Телефоны, яблоки, груши..."
         static let titleForSearchButton = "Искать"
-        static let horizontalInset: CGFloat = 5
-        static let insetDistanceView: CGFloat = 10
-        static let spaceBetweenRows: CGFloat = 10
+        static let horizontalInset: CGFloat = 8
+        static let insetDistanceView: CGFloat = 16
+        static let spaceBetweenRows: CGFloat = 8
         static let cellProportion: Double = 130/100
     }
 
@@ -175,7 +175,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = (view.frame.width - Constants.horizontalInset) / 4
+        let itemWidth = (view.frame.width - Constants.horizontalInset) / 3
         return CGSize(width: itemWidth, height: Constants.cellProportion * itemWidth)
     }
 
