@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  SearchPhoto
 //
 //  Created by Slava Orlov on 07.03.2023.
@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     // MARK: - Constants
 
     private enum Constants {
         static let cornerRadius: CGFloat = 12
         static let fontSize: CGFloat = 16
+        static let placeholderText: String = "Телефоны, яблоки, груши..."
+        static let titleForSearchButton = "Искать"
     }
 
     // MARK: - Properties
@@ -40,7 +42,7 @@ final class ViewController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension ViewController {
+private extension MainViewController {
 
     func configureAppearance() {
         configureBackground()
@@ -50,7 +52,7 @@ private extension ViewController {
     }
 
     func configureBackground() {
-        view.backgroundColor = .red
+        view.backgroundColor = .white
     }
 
     func configureTextField() {
@@ -62,12 +64,11 @@ private extension ViewController {
         searchTextField.layer.cornerRadius = Constants.cornerRadius
         searchTextField.layer.masksToBounds = true
         searchTextField.borderStyle = .none
-        searchTextField.font = UIFont.systemFont(ofSize: 16)
+        searchTextField.font = UIFont.systemFont(ofSize: Constants.fontSize)
         searchTextField.clearButtonMode = .whileEditing
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        
-        // configure placeholder for textField
-        let placeholderText = "Телефоны, яблоки, груши..."
+
+        let placeholderText = Constants.placeholderText
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: Constants.fontSize),
             .foregroundColor: AssetColor.grayText
@@ -80,7 +81,7 @@ private extension ViewController {
         searchButton.backgroundColor = AssetColor.red
         searchButton.tintColor = AssetColor.white
         searchButton.layer.cornerRadius = Constants.cornerRadius
-        searchButton.setTitle("Искать", for: .normal)
+        searchButton.setTitle(Constants.titleForSearchButton, for: .normal)
         searchButton.titleLabel?.font = UIFont.systemFont(ofSize: Constants.fontSize)
     }
 
@@ -103,12 +104,12 @@ private extension ViewController {
 
 // MARK: - Actions
 
-private extension ViewController {
+private extension MainViewController {
 
     @objc func textFieldDidChange(_ textField: UITextField) {
         let hasText = textField.text?.isEmpty == false
         UIView.animate(withDuration: 0.4) {
-            self.topConstraint.constant = hasText ? 20 : 12
+            self.topConstraint.constant = hasText ? 0 : 0
             self.view.layoutIfNeeded()
         }
     }
