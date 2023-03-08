@@ -16,11 +16,16 @@ final class MainViewController: UIViewController {
         static let fontSize: CGFloat = 16
         static let placeholderText: String = "Телефоны, яблоки, груши..."
         static let titleForSearchButton = "Искать"
+        static let horizontalInset: CGFloat = 5
+        static let insetDistanceView: CGFloat = 10
+        static let spaceBetweenRows: CGFloat = 10
+        static let cellProportion: Double = 130/100
     }
 
     // MARK: - Properties
 
-    var searchController = UISearchController(searchResultsController: nil)
+    private var image: ImageModel? = nil
+    private var imageManager = ImageLoader()
 
     // MARK: - IBOutlets
 
@@ -29,7 +34,7 @@ final class MainViewController: UIViewController {
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
-
+    
     // MARK: - ViewController
 
     override func viewDidLoad() {
@@ -87,6 +92,11 @@ private extension MainViewController {
 
     func configureCollectionView() {
         searchCollectionView.backgroundColor = AssetColor.white
+        searchCollectionView.delegate = self
+        searchCollectionView.dataSource = self
+        searchCollectionView.register(ImageCollectionViewCell.self,
+                                      forCellWithReuseIdentifier: "ImageCell"
+        )
     }
 
     func addLeftImageTo(textField: UITextField, andImage image: UIImage) {
@@ -98,6 +108,18 @@ private extension MainViewController {
         leftImageView.image = image
         textField.leftView = leftImageView
         textField.leftViewMode = .always
+    }
+
+    func loadImages(query: String) {
+        imageManager.loadImage(query: query) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.image = image
+                self?.searchCollectionView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
 }
@@ -112,6 +134,65 @@ private extension MainViewController {
             self.topConstraint.constant = hasText ? 0 : 0
             self.view.layoutIfNeeded()
         }
+    }
+
+    @IBAction func tapSearchButton(_ sender: Any) {
+        guard let query = searchTextField.text else {
+            return
+        }
+        loadImages(query: query)
+    }
+
+}
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        image?.results.count ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "ImageCell",
+            for: indexPath) as? ImageCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let urlImage = image?.results[indexPath.item].id
+        cell.configure(urlImage: urlImage ?? "")
+        return cell
+    }
+
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemWidth = (view.frame.width - Constants.horizontalInset) / 4
+        return CGSize(width: itemWidth, height: Constants.cellProportion * itemWidth)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return Constants.spaceBetweenRows
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(
+            top: Constants.insetDistanceView,
+            left: Constants.insetDistanceView,
+            bottom: 0,
+            right: Constants.insetDistanceView)
     }
 
 }
