@@ -41,7 +41,7 @@
                                 <rect key="frame" x="16" y="294" width="382" height="48"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f8j-ZO-B1J" userLabel="Search Text Field">
-                                        <rect key="frame" x="0.0" y="0.0" width="307" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="292" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="AXP-Up-P3L"/>
                                         </constraints>
@@ -49,7 +49,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOI-CJ-anH" userLabel="Search Button">
-                                        <rect key="frame" x="315" y="0.0" width="67" height="48"/>
+                                        <rect key="frame" x="300" y="0.0" width="82" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="82" id="crG-ak-LcU"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
@@ -58,7 +61,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="WOI-CJ-anH" firstAttribute="leading" secondItem="f8j-ZO-B1J" secondAttribute="trailing" constant="8" id="0fQ-iE-0po"/>
+                                    <constraint firstItem="WOI-CJ-anH" firstAttribute="leading" relation="lessThanOrEqual" secondItem="f8j-ZO-B1J" secondAttribute="trailing" constant="8" id="0fQ-iE-0po"/>
                                 </constraints>
                             </stackView>
                         </subviews>
