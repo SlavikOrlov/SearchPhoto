@@ -200,7 +200,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = Constants.insetDistanceView * (Constants.itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / Constants.itemsPerRow
+        let widthPerItem = floor(availableWidth / Constants.itemsPerRow)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
