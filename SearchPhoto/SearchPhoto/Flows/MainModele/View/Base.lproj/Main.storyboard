@@ -40,7 +40,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vQi-3s-nOJ">
                                 <rect key="frame" x="16" y="294" width="382" height="48"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f8j-ZO-B1J" userLabel="Search Text Field">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f8j-ZO-B1J" userLabel="Search Text Field" customClass="CustomTextField" customModule="SearchPhoto" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="292" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="AXP-Up-P3L"/>

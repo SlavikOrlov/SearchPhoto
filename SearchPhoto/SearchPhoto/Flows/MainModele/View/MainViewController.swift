@@ -35,7 +35,7 @@ final class MainViewController: UIViewController {
 
     @IBOutlet private weak var searchCollectionView: UICollectionView!
     @IBOutlet private weak var searchStackView: UIStackView!
-    @IBOutlet private weak var searchTextField: UITextField!
+    @IBOutlet private weak var searchTextField: CustomTextField!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
     
@@ -102,6 +102,8 @@ private extension MainViewController {
         searchCollectionView.register(ImageCollectionViewCell.self,
                                       forCellWithReuseIdentifier: "ImageCell"
         )
+        let layout = searchCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.estimatedItemSize = .zero
     }
 
     func configureaActivityIndicator() {
