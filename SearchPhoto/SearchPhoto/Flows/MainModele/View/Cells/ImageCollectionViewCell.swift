@@ -55,11 +55,13 @@ private extension ImageCollectionViewCell {
     func configureImageView() {
         contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = AssetColor.white
         self.layer.cornerRadius = Constants.cornerRadius
         self.layer.borderWidth = Constants.borderWidth
         self.layer.borderColor = AssetColor.grayBorder.cgColor
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = Constants.cornerRadius
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

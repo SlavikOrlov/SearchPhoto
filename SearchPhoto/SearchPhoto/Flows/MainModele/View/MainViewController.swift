@@ -21,12 +21,15 @@ final class MainViewController: UIViewController {
         static let insetDistanceView: CGFloat = 16
         static let spaceBetweenRows: CGFloat = 8
         static let cellProportion: Double = 130/100
+        static let topPaddingForSearch: CGFloat = 24
+        static let topPaddingBeforeSearch: CGFloat = 250
     }
 
     // MARK: - Properties
 
     private var image: ImageModel? = nil
     private var imageManager = ImageLoader()
+    let activityIndicator = UIActivityIndicatorView(style: .large)
 
     // MARK: - IBOutlets
 
@@ -55,6 +58,7 @@ private extension MainViewController {
         configureTextField()
         configureButton()
         configureCollectionView()
+        configureaActivityIndicator()
     }
 
     func configureBackground() {
@@ -100,6 +104,14 @@ private extension MainViewController {
         )
     }
 
+    func configureaActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.center = view.center
+        activityIndicator.color = .gray
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.stopAnimating()
+    }
+
     func addLeftImageTo(textField: UITextField, andImage image: UIImage) {
         let leftImageView = UIImageView(frame: CGRect(x: 0.0,
                                                       y: 0.0,
@@ -132,7 +144,7 @@ private extension MainViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         let hasText = textField.text?.isEmpty == false
         UIView.animate(withDuration: 0.4) {
-            self.topConstraint.constant = hasText ? 0 : 0
+            self.topConstraint.constant = hasText ? Constants.topPaddingForSearch : Constants.topPaddingForSearch
             self.view.layoutIfNeeded()
         }
     }
@@ -141,9 +153,17 @@ private extension MainViewController {
         guard let query = searchTextField.text else {
             return
         }
-        loadImages(query: query)
+        activityIndicator.startAnimating()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.loadImages(query: query)
+            DispatchQueue.main.async {
+                self.searchCollectionView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.view.endEditing(true)
+            }
+        }
     }
-
+    
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource

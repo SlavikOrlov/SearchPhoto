@@ -24,7 +24,7 @@ final class NetworkService {
         parameters.path = Constants.endpoint
         parameters.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.apiKey),
-            URLQueryItem(name: "query", value: "show")
+            URLQueryItem(name: "query", value: query)
         ]
 
         guard let url = parameters.url else {
