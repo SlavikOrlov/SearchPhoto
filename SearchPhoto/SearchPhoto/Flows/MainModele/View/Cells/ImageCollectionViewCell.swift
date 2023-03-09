@@ -9,6 +9,13 @@ import UIKit
 
 final class ImageCollectionViewCell: UICollectionViewCell {
 
+    // MARK: - Constants
+
+    private enum Constants {
+        static let cornerRadius: CGFloat = 4
+        static let borderWidth: CGFloat = 1
+    }
+
     // MARK: - Properties
 
     let imageView = UIImageView()
@@ -48,7 +55,11 @@ private extension ImageCollectionViewCell {
     func configureImageView() {
         contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        self.layer.cornerRadius = Constants.cornerRadius
+        self.layer.borderWidth = Constants.borderWidth
+        self.layer.borderColor = AssetColor.grayBorder.cgColor
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
