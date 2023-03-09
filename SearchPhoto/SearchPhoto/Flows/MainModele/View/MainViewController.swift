@@ -16,6 +16,7 @@ final class MainViewController: UIViewController {
         static let fontSize: CGFloat = 16
         static let placeholderText: String = "Телефоны, яблоки, груши..."
         static let titleForSearchButton = "Искать"
+        static let itemsPerRow: CGFloat = 3
         static let horizontalInset: CGFloat = 8
         static let insetDistanceView: CGFloat = 16
         static let spaceBetweenRows: CGFloat = 8
@@ -161,7 +162,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             for: indexPath) as? ImageCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let urlImage = image?.results[indexPath.item].id
+        let urlImage = image?.results[indexPath.item].urls.thumb
         cell.configure(urlImage: urlImage ?? "")
         return cell
     }
@@ -171,23 +172,22 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewWidth = collectionView.frame.width
-        let availableWidth = collectionViewWidth - Constants.horizontalInset * 2
-        let itemWidth = availableWidth / 3
-        let itemHeight = itemWidth
-        return CGSize(width: itemWidth, height: itemHeight)
+        let paddingSpace = Constants.insetDistanceView * (Constants.itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / Constants.itemsPerRow
+        return CGSize(width: widthPerItem, height: widthPerItem)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Constants.spaceBetweenRows
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return Constants.insetDistanceView
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -197,5 +197,5 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
             bottom: 0,
             right: Constants.insetDistanceView)
     }
-
+    
 }

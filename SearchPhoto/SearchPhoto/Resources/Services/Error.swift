@@ -7,9 +7,9 @@
 
 import Foundation
 
- enum CustomError: Error {
-     case badUrl
-     case decodeJSON
-     case receivedRequestingData
-     case unknownServerError
- }
+enum CustomError: Error {
+    case badUrl
+    case decodeJSON
+    case receivedRequestingData
+    case unknownServerError
+}

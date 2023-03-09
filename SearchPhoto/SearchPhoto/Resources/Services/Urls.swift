@@ -7,6 +7,6 @@
 
 import Foundation
 
- enum Urls {
-     static let base: String = "https://api.unsplash.com"
- }
+enum Urls {
+    static let base: String = "https://api.unsplash.com"
+}
