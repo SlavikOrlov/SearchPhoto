@@ -16,6 +16,7 @@ enum AssetColor {
     static let red = UIColor(rgb: 0xEB0C0C)
     static let white = UIColor(rgb: 0xFFFFFF)
     static let grayBorder = UIColor(rgb: 0xEBEBEB)
+    static let grayBackground = UIColor(rgb: 0x000000).withAlphaComponent(0.4)
 }
 
 // MARK: - Configure Appearance

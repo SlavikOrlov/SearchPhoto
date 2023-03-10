@@ -30,6 +30,7 @@ final class MainViewController: UIViewController {
     private var image: ImageModel? = nil
     private var imageManager = ImageLoader()
     let activityIndicator = UIActivityIndicatorView(style: .large)
+    var searchButtonPressedAtLeastOnce = false
 
     // MARK: - IBOutlets
 
@@ -38,7 +39,8 @@ final class MainViewController: UIViewController {
     @IBOutlet private weak var searchTextField: CustomTextField!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
-    
+    @IBOutlet private weak var overlayView: UIView!
+
     // MARK: - ViewController
 
     override func viewDidLoad() {
@@ -58,6 +60,7 @@ private extension MainViewController {
         configureTextField()
         configureButton()
         configureCollectionView()
+        configureOverlayView()
         configureaActivityIndicator()
     }
 
@@ -106,6 +109,11 @@ private extension MainViewController {
         layout.estimatedItemSize = .zero
     }
 
+    func configureOverlayView() {
+        overlayView.isHidden = true
+        overlayView.backgroundColor = AssetColor.grayBackground
+    }
+
     func configureaActivityIndicator() {
         view.addSubview(activityIndicator)
         activityIndicator.center = view.center
@@ -144,6 +152,12 @@ private extension MainViewController {
 private extension MainViewController {
 
     @objc func textFieldDidChange(_ textField: UITextField) {
+        if searchButtonPressedAtLeastOnce {
+            overlayView.isHidden = false
+            overlayView.isUserInteractionEnabled = true
+            searchCollectionView.bringSubviewToFront(overlayView)
+        }
+
         let hasText = textField.text?.isEmpty == false
         UIView.animate(withDuration: 0.4) {
             self.topConstraint.constant = hasText ? Constants.topPaddingForSearch : Constants.topPaddingForSearch
@@ -155,6 +169,9 @@ private extension MainViewController {
         guard let query = searchTextField.text else {
             return
         }
+        searchButtonPressedAtLeastOnce = true
+        overlayView.isHidden = true
+
         activityIndicator.startAnimating()
         DispatchQueue.global(qos: .userInitiated).async {
             self.loadImages(query: query)
@@ -198,16 +215,17 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = Constants.insetDistanceView * (Constants.itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = floor(availableWidth / Constants.itemsPerRow)
-        return CGSize(width: widthPerItem, height: widthPerItem)
+        let width = (collectionView.frame.size.width - 2
+                     * Constants.insetDistanceView - 2
+                     * Constants.horizontalInset) / Constants.itemsPerRow
+        return CGSize(width: width, height: width)
+
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return Constants.insetDistanceView
+        return Constants.horizontalInset
     }
     
     func collectionView(_ collectionView: UICollectionView,

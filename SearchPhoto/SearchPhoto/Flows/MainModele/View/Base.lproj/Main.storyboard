@@ -26,6 +26,10 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <view key="backgroundView" contentMode="scaleToFill" id="OJR-F3-2Cn">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="Ayi-Tk-UKG">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -78,6 +82,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="overlayView" destination="OJR-F3-2Cn" id="p4a-MS-9dm"/>
                         <outlet property="searchButton" destination="WOI-CJ-anH" id="dQ5-a2-z02"/>
                         <outlet property="searchCollectionView" destination="39b-Dp-zHy" id="RIx-aM-bZB"/>
                         <outlet property="searchStackView" destination="vQi-3s-nOJ" id="G0B-2k-WKI"/>
